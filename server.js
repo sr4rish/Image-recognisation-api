@@ -7,6 +7,8 @@ const register = require('./controllers/register')
 const signin = require('./controllers/signin')
 const profile = require('./controllers/profile')
 const image = require('./controllers/image')
+const sentiment = require('./controllers/movieReview')
+const news = require('./controllers/news')
 
 const db = knex({
     client: 'pg',
@@ -36,6 +38,10 @@ app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)})
 
 app.put('/image', (req, res) => {image.handleImagePut(req, res, db)})
 app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)})
+
+app.post('/sentiment', (req, res) => {sentiment.handleApiCall(req, res)})
+
+app.post('/news', (req, res) => {news.handleApiCall(req, res)})
 
 app.listen(process.env.PORT || 3000, ()=>{
     console.log('app running on port ${process.env.PORT}')
